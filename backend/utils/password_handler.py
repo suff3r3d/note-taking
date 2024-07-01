@@ -4,7 +4,7 @@ import bcrypt
 
 class PasswordHandler:
     @staticmethod
-    def hash(password: str) -> bytes:
+    def hash(password: str) -> str:
         return bytes.decode(bcrypt.hashpw(password.encode(), bcrypt.gensalt()), "utf-8")
     
     @staticmethod
