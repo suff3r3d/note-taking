@@ -4,9 +4,9 @@ import bcrypt
 
 class PasswordHandler:
     @staticmethod
-    def hash(password: bytes) -> bytes:
-        return bcrypt.hashpw(password, bcrypt.gensalt())
+    def hash(password: str) -> bytes:
+        return bytes.decode(bcrypt.hashpw(password.encode(), bcrypt.gensalt()), "utf-8")
     
     @staticmethod
-    def verify(password: bytes, hashed: bytes) -> bool:
-        return bcrypt.checkpw(password, hashed)
+    def verify(password: str, hashed: str) -> bool:
+        return bcrypt.checkpw(password.encode(), hashed.encode())
