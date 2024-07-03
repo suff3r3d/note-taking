@@ -29,7 +29,7 @@ const SignUp = () => {
         <>
             <h2>Sign up</h2>
             <Form onSubmit={handleSignUp}>
-                <input type="username" name="username" placeholder="username" required/>
+                <input type="name" name="name" placeholder="name" required/>
                 <input type="email" name="email" placeholder="email" required/>
                 <input type="password" name="password" placeholder="password" required/>
                 <input type="submit" />
