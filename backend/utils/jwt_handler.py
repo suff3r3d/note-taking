@@ -2,6 +2,7 @@ from base64 import urlsafe_b64decode, urlsafe_b64encode
 from json import dumps, loads
 import hmac
 from hashlib import sha256
+from typing import Optional, Tuple
 from config import config
 
 class Base64:
@@ -31,19 +32,24 @@ class JWTHandler:
             Expiration date of the token (Redis)
             '''
 
-            return ".".join([
+            token =  ".".join([
                 Base64.encode(dumps({"alg": "HS256", "typ": "JWT"})),
                 Base64.encode(dumps(payload)),
                 JWTHandler.sign(payload, secret)
             ])
+            
+            print(token)
+            print(JWTHandler.verify(token))
+
+            return token
         except Exception as e:
             return str(e)
     
     @staticmethod
-    def verify(signature: str) -> bool:
+    def verify(data: str) -> Tuple[Optional[dict], Exception]:
         # Notice the expiration part, too
         try:
-            _, payload, signature = str.split('.')
+            _, payload, signature = data.split('.')
 
             '''
             Expiration date here (Redis)
