@@ -25,7 +25,7 @@ class UserRepository:
         return result != None
     
     def create(self, user: SignUpRequest) -> Exception:
-        assert user.email and user.name and user.password , "Email, name and password must not be null!"
+        assert user.email and user.username and user.name and user.password , "Email, name, username and password must not be null!"
         assert not self.findOne(user.email), "Email used before!"
 
         try:
