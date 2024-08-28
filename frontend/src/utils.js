@@ -11,6 +11,7 @@ export async function apiCall(
         if (body) {
             headers["Content-Type"] = "application/json";
         }
+
         const res = await fetch(cfg.BE_URL + path, {
             method,
             headers,
