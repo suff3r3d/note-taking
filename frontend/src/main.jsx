@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
+import SignIn from '../routes/signin.jsx'
 import SignUp from '../routes/signup.jsx'
 import Homepage from '../routes/homepage.jsx'
 
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Routes>
      <Route path='/' element={<Homepage/>}/>
      <Route path='/signup' element={<SignUp/>}/>
+     <Route path='/signin' element={<SignIn/>}/>
     </Routes>
   </BrowserRouter>,
 )
