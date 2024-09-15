@@ -21,18 +21,22 @@ class UserRepository:
         self._engine = create_engine(cfg['DATABASE_URL'])
         self._DBSession = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=self._engine))
 
-    def findOne(self, email: str) -> Optional[UserModel]:
-        result = self._DBSession.query(User).where(User.email == 'email').first()
-        print(result)
+    def findEmail(self, email: str) -> bool:
+        result = self._DBSession.query(User).where(User.email == email).first()
+        return result != None
+
+    def findUsername(self, username: str) -> bool:
+        result = self._DBSession.query(User).where(User.username == username).first()
         return result != None
     
     def create(self, user: SignUpRequest) -> Exception:
-        #print(user)
-        assert user.email and user.username and user.name and user.password , "Email, name, username and password must not be null!"
-        assert not self.findOne(user.email), "Email used before!"
-
         try:
+            assert user.email and user.username and user.name and user.password , "Email, name, username and password must not be null!"
+            assert not self.findEmail(user.email), "Email used!"
+            assert not self.findUsername(user.username), "Username used!"
+
             new_user = User()
+
             new_user.username = user.username
             new_user.name = user.name
             new_user.email = user.email
@@ -46,7 +50,5 @@ class UserRepository:
             print('Adding user failed! Rolled back')
             self._DBSession.rollback()
 
-            print(e)
-
-            return Exception('Cannot add user!')
+            return e
 
