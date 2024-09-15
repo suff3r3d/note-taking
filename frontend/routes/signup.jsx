@@ -4,18 +4,16 @@ import { apiCall } from "../src/utils";
 
 const SignUp = () => {
     const handleSignUp = async (event) => {
-        console.clear();
-
         event.preventDefault();
 
-        const SignInInfo = {
+        const SignUpInfo = {
             username: event.target.elements['username'].value,
             name: event.target.elements['name'].value,
             email: event.target.elements['email'].value,
             password: event.target.elements['password'].value,
         };
 
-        const res = await apiCall('/api/signup', "POST", SignInInfo)
+        const res = await apiCall('/api/signup', "POST", SignUpInfo)
         console.log(res)
     };
 
