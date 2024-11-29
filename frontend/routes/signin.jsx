@@ -4,7 +4,7 @@ import { apiCall } from "../src/utils";
 
 const SignIn = () => {
     const handleSignIn = async (event) => {
-        event.preventDefault();z
+        event.preventDefault();
 
         const SignInInfo = {
             username: event.target.elements['username'].value,
